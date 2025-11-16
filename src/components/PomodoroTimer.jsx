@@ -31,6 +31,14 @@ function PomodoroTimer() {
     if (minutesRef.current === 0 && secondsRef.current === 0) {
      setIsActive(false)
      clearInterval(interval)
+
+     try {
+        const audio = new Audio('../public/pomodoroSound.mp3')
+        audio.play().catch(e => console.log('Audio play failed:', e))
+     } catch (e) {
+        console.error('Error playing audio:', e)
+     }
+
      setMode((prevMode) => prevMode === 'work' ? 'break' : 'work')
      return 
     }
